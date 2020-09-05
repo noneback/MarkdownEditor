@@ -1,17 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import { render } from 'react-dom';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import './index.css';
+import 'antd/dist/antd.min.css';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+import configReducer from './reducers/configReducer';
+import siderReducer from './reducers/SiderReducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-ReactDOM.render(
-  <React.StrictMode>
+const combineReducer = combineReducers({
+  config: configReducer,
+  sider: siderReducer,
+});
+
+const store = createStore(combineReducer, composeWithDevTools());
+
+render(
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();

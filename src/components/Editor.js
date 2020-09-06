@@ -3,8 +3,9 @@ import 'vditor/src/assets/scss/index.scss';
 import Vditor from 'vditor';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './Footer';
+import { AutoComplete } from 'antd';
 
-const Editor = ({ visible }) => {
+const Editor = () => {
   const dispatcher = useDispatch();
   const config = useSelector(state => state.config);
 
@@ -35,8 +36,10 @@ const Editor = ({ visible }) => {
 
   return (
     <>
-      <div id="vditor"></div>
-      <Footer />
+      
+        <div id="vditor"></div>
+        <Footer />
+      
     </>
   );
 };

@@ -22,20 +22,25 @@ const TopMenu = () => {
   const config = useSelector(state => state.config);
 
   const isFold = useSelector(state => state.sider).visible;
-  const [openKeys, setOpenKeys] = useState([]);
   const clicked = e => {
     console.log('clicked :>> ', e);
-    // setOpenKeys(openKeys.concat(e.keyPath[0]));
+  };
+
+  const style = {
+    fontSize: '1em',
+    color: config.appearence.theme === 'classic' ? 'black' : 'white',
   };
   return (
     <>
       <span style={{ float: 'left' }}>
         {isFold ? (
           <MenuFoldOutlined
+            style={style}
             onClick={() => dispatcher({ type: TOGGLE_SIDE_FOLD })}
           />
         ) : (
           <MenuUnfoldOutlined
+            style={style}
             onClick={() => dispatcher({ type: TOGGLE_SIDE_FOLD })}
           />
         )}

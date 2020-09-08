@@ -1,0 +1,10 @@
+{
+  "config": {
+    "theme": "classic",
+    "typewriterMode": false,
+    "icon": "ant",
+    "outline": false,
+    "toolbar": []
+  },
+  "user": []
+}

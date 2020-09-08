@@ -24,7 +24,7 @@ const configReducer = (state = init_config, action) => {
         ...state,
         appearence: {
           ...state.appearence,
-          theme: state.appearence.theme == 'classic' ? 'dark' : 'classic',
+          theme: state.appearence.theme === 'classic' ? 'dark' : 'classic',
         },
       };
   }

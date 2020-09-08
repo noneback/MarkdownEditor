@@ -4,7 +4,7 @@ import { Menu } from 'antd';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
-import CenterWrapper from './Wrapper';
+import CenterWrapper from '../styles/Wrapper';
 
 import {
   AppstoreOutlined,

@@ -1,23 +1,9 @@
 import React from 'react';
-import { Layout } from 'antd';
 import 'antd/dist/antd.css';
-import './index.css';
-import LoginDrawer from './components/LoginDrawer';
-import AppHeader from './components/AppHeader';
-import AppContent from './components/AppContent';
-import AppSider from './components/AppSider';
+import Index from './pages/Index';
 
 const App = () => {
-  return (
-    <Layout theme="light">
-      {/* <LoginDrawer></LoginDrawer> */}
-      <AppSider />
-      <Layout>
-        <AppHeader />
-        <AppContent />
-      </Layout>
-    </Layout>
-  );
+  return <Index />;
 };
 
 export default App;

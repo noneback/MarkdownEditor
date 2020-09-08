@@ -1,17 +1,11 @@
 import React from 'react';
 import { Switch } from 'antd';
-import styled from 'styled-components';
+import Label from '../styles/Label'
+import LeftSpan from '../styles/LeftSpan'
 
 const CustomizedSwitch = ({ label, changed, defaultState,openHint,closeHint }) => {
-  const Label = styled.span`
-    text-align: left;
-    margin: 10 auto;
-    padding: 0 0px 0px 0px;
-  `;
 
-  const LeftSpan = styled.span`
-    float: right;
-  `;
+
   return (
     <>
       <div>

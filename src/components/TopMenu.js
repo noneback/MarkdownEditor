@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Menu } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
@@ -14,7 +14,8 @@ import {
   MailOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
-import CenterWrapper from './Wrapper';
+
+import CenterWrapper from '../styles/Wrapper';
 const { SubMenu } = Menu;
 
 const TopMenu = () => {
@@ -79,7 +80,7 @@ const TopMenu = () => {
               <CustomizedSwitch
                 label={'夜间模式'}
                 changed={() => dispatcher({ type: TOGGLE_MD_THEME })}
-                defaultState={config.appearence.theme == 'dark'}
+                defaultState={config.appearence.theme === 'dark'}
                 openHint={'Light'}
                 closeHint={'Dark'}
               />

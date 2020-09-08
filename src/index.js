@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './App';
+import Index from './pages/Index';
 import './index.css';
 import 'antd/dist/antd.min.css';
 import { Provider } from 'react-redux';
@@ -18,7 +18,7 @@ const store = createStore(combineReducer, composeWithDevTools());
 
 render(
   <Provider store={store}>
-    <App />
+    <Index />
   </Provider>,
   document.getElementById('root')
 );

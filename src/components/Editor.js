@@ -4,14 +4,13 @@ import Vditor from 'vditor';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './Footer';
 
-import Api from '../services/api'
+import Api from '../services/api';
 
 const Editor = () => {
   const dispatcher = useDispatch();
   const config = useSelector(state => state.config);
 
   // useEffect(()=>Api.getConfig(),[])
-  
 
   useEffect(() => {
     const vditor = new Vditor('vditor', {
@@ -35,11 +34,11 @@ const Editor = () => {
       },
     });
     console.log('config:', config);
-  }, []);
+  }, [config]);
 
   return (
     <>
-      <div id="vditor"></div>
+      <div id="vditor" ></div>
       <Footer />
     </>
   );

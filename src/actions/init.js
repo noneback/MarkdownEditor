@@ -5,23 +5,20 @@ export const init_config = {
     icon: 'ant',
   },
   toolbar: {
-    pin: true,
     hide: false,
   },
 
   markdown: {
     autoSpace: true,
-    fixTermTypo: true,
     chinesePunct: true,
     toc: false,
     paragraphBeginningSpace: false,
   },
   codeBlock: {
-    hightLight: true,
+    highLight: true,
     lineNumber: true,
   },
   math: {
     engine: 'KaTeX',
   },
-  helper: 0,
 };

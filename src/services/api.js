@@ -2,14 +2,37 @@ import Axios from 'axios';
 
 const baseUrl = '';
 
-
-
-const getConfig = () => {
-  Axios.get('/config').then(res => {
-    console.log(res.data);
-  });
+//GET
+const getConfig = async () => {
+  const config = await Axios.get('/config');
+  return config;
 };
 
+const getUser = () => {};
+
+const getArticles = () => {};
+
+const getArticleContene = () => {};
+
+//POST
+const postAvatar = () => {};
+
+const updateArticle = () => {};
+
+const updateUserInfo = () => {};
+
+const updateConfig = () => {};
+
+const updateAll = () => {};
+
 export default {
-    getConfig
+  getArticleContene,
+  getArticles,
+  getUser,
+  getConfig,
+  postAvatar,
+  updateArticle,
+  updateUserInfo,
+  updateConfig,
+  updateAll,
 };

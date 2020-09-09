@@ -4,12 +4,13 @@ import Vditor from 'vditor';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './Footer';
 import Utils from '../utils/utils';
-
+import Axios from 'axios';
+import { UPDATE_CONTENT } from '../actions/types';
 
 const Editor = () => {
   const dispatcher = useDispatch();
-
   const config = useSelector(state => state.config);
+  const article = useSelector(state => state.article);
 
   useEffect(() => {
     const vditor = new Vditor('vditor', {
@@ -28,17 +29,27 @@ const Editor = () => {
           lineNumber: config.codeBlock.lineNumber,
         },
         math: { ...config.math },
+        typewriterMode: true,
 
         cache: {
           enable: true,
         },
       },
+      input(value) {
+        console.log('input while:', value);
+        dispatcher({ type: UPDATE_CONTENT, content: value });
+      },
       after() {
         Utils.saveLocalConfig({ ...config });
         console.log(vditor);
+        vditor.setValue(article.content);
+        console.log(
+          'after render editor:focus',
+          window.localStorage.getItem('vditorvditor')
+        );
       },
     });
-  }, [config]);
+  }, [config, article.id]);
 
   return (
     <>

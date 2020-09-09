@@ -11,10 +11,12 @@ import configReducer from './reducers/configReducer';
 import siderReducer from './reducers/SiderReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import Index from './pages/Index';
+import articleReducer from './reducers/articleReducer';
 
 const combineReducer = combineReducers({
   config: configReducer,
   sider: siderReducer,
+  article: articleReducer,
 });
 
 const store = createStore(combineReducer, composeWithDevTools());

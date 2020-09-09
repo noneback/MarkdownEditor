@@ -1,0 +1,8 @@
+put http://localhost:3001/articles/3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id":3,
+   " title":"lalala",
+    "content":"好AHAHAHasdaA"
+}

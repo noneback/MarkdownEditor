@@ -96,7 +96,7 @@ const TopMenu = () => {
               />
             </Menu.Item>
             // todo
-            <Menu.ItemGroup title="图标风格">
+            <Menu.ItemGroup title="图标风格(需要刷新)">
               <CustomizedSelect
                 defaultValue={config.appearence.icon}
                 onChange={val =>

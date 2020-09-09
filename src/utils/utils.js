@@ -38,9 +38,29 @@ const exportConfig = () => {
   const config = window.localStorage.getItem('config');
   return JSON.parse(config);
 };
+const generateID = length => {
+  return Number(
+    Math.random().toString().substr(3, length) + Date.now()
+  ).toString(36);
+};
+
+const getTitle = (article) => {
+  if (article) {
+    const regex = /^#\s.*/i;
+    const title = new String(article.match(regex)).split('#')[1];
+    console.log(title);
+    if(!title) return "NO TITLE"
+    return title;
+  }
+  
+};
+
+
 
 export default {
   exportConfig,
+  generateID,
   initLocalConfig,
   saveLocalConfig,
+  getTitle,
 };

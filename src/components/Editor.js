@@ -49,7 +49,7 @@ const Editor = () => {
         );
       },
     });
-  }, [config, article.id]);
+  }, [config, article.articleId]);
 
   return (
     <>

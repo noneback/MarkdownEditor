@@ -9,6 +9,7 @@
     "antd": "^4.6.2",
     "axios": "^0.20.0",
     "node-sass": "^4.14.1",
+    "qs": "^6.9.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-loadable": "^5.5.0",
@@ -45,5 +46,5 @@
   "devDependencies": {
     "json-server": "^0.16.1"
   },
-  "proxy": "http://localhost:3001/"
+  "proxy": "http://10.28.234.78:8080"
 }

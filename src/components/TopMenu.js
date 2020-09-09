@@ -44,28 +44,7 @@ const TopMenu = () => {
     console.log('clicked :>> ', e);
   };
 
-  const newMDFile = () => {
-    dispatcher({ type: CREATE_FILE });
-  };
-
-  const saveMDFile = () => {
-    const isIn = list.filter(l => l.id === article.id);
-    if (isIn) {
-      Api.updateArticle(article)
-        .then(res => Api.getArticles())
-        .then(res => dispatcher({ type: UPLOAD_LIST, list: res }));
-    } else {
-      const art = {
-        id: Utils.generateID(),
-        title: Utils.getTitle(article.content),
-        content: article.content,
-      };
-      Api.updateArticle(art)
-        .then(res => Api.getArticles())
-        .then(res => dispatcher({ type: UPLOAD_LIST, list: res }));
-      //createArticle
-    }
-  };
+ 
 
   const style = {
     fontSize: '1em',
@@ -231,12 +210,7 @@ const TopMenu = () => {
               </CustomizedSelect>
             </Menu.ItemGroup>
           </SubMenu>
-          <Button style={{ verticalAlign: 'center' }} onClick={newMDFile}>
-            新建md文件
-          </Button>
-          <Button style={{ verticalAlign: 'center' }} onClick={saveMDFile}>
-            保存
-          </Button>
+          
         </Menu>
       </CenterWrapper>
     </>

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout,Spin } from 'antd';
 import SliderMenu from './SliderMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { TOGGLE_SIDE_FOLD } from '../actions/types';
+
 const { Sider } = Layout;
 
 const AppSider = () => {
@@ -15,7 +16,7 @@ const AppSider = () => {
     <Sider
       theme={theme === 'classic' ? 'light' : 'dark'}
       breakpoint="lg"
-      width={"30%"}
+      width={"40%"}
       defaultCollapsed="true "
       collapsed={visible}
       collapsedWidth="0"

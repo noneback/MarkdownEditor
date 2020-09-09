@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Menu } from 'antd';
+import { Menu, Button, Spin } from 'antd';
 import { Avatar } from 'antd';
 import {
   UserOutlined,
@@ -10,7 +10,7 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 
-import { UPLOAD_LIST } from '../actions/types';
+import { UPLOAD_LIST, CREATE_FILE, UPDATE_CONTENT } from '../actions/types';
 import { useSelector, useDispatch } from 'react-redux';
 import CenterWrapper from '../styles/Wrapper';
 import ArticleList from './ArticleList';
@@ -18,12 +18,13 @@ import Api from '../services/api';
 import CardList from './CardList';
 import Utils from '../utils/utils';
 import Axios from 'axios';
+import utils from '../utils/utils';
 
 const { SubMenu } = Menu;
 const SliderMenu = () => {
   const [user, setUser] = useState({ name: 'test' });
   const [title, setTitle] = useState('');
-  // const [list, setList] = useState([]);
+  const [spin, setSpin] = useState(false);
   const list = useSelector(state => state.sider).list;
 
   const dispatcher = useDispatch();
@@ -32,6 +33,46 @@ const SliderMenu = () => {
 
   const config = useSelector(state => state.config);
   const theme = config.appearence.theme;
+
+  const newMDFile = () => {
+    dispatcher({ type: CREATE_FILE });
+  };
+
+  const saveNewFile = () => {
+    setSpin(true);
+
+    Api.createArticle({
+      accountId: article.accountId,
+      content: article.content,
+      title: Utils.getTitle(article.content),
+    })
+      .then(res =>
+        utils.sleep(500).then(res => {
+          setSpin(false);
+          dispatcher({ type: UPDATE_CONTENT, content: ' ' });
+        })
+      )
+      .catch(err => console.log('err in saveNewFile', err));
+  };
+
+  const saveMDFile = () => {
+    const isIn = list.filter(l => l.id === article.id);
+    if (isIn) {
+      Api.updateArticle(article)
+        .then(res => Api.getArticles())
+        .then(res => dispatcher({ type: UPLOAD_LIST, list: res }));
+    } else {
+      const art = {
+        id: Utils.generateID(),
+        title: Utils.getTitle(article.content),
+        content: article.content,
+      };
+      Api.updateArticle(art)
+        .then(res => Api.getArticles())
+        .then(res => dispatcher({ type: UPLOAD_LIST, list: res }));
+      //createArticle
+    }
+  };
 
   const userExit = () => {
     window.localStorage.setItem('vditorvditor', '');
@@ -46,10 +87,8 @@ const SliderMenu = () => {
 
   useEffect(() => {
     Api.getArticles().then(res => dispatcher({ type: UPLOAD_LIST, list: res }));
-  }, []);
-  useEffect(() => {}, []);
+  }, [article]);
 
-  const mockArticles = list;
   console.log('list', list);
 
   return (
@@ -87,7 +126,9 @@ const SliderMenu = () => {
         </SubMenu>
 
         <SubMenu key="sub2" icon={<AppstoreOutlined />} title="文章列表">
-          <CardList data={mockArticles}></CardList>
+          <Spin spinning={spin}>
+            <CardList data={list}></CardList>
+          </Spin>
           {/* <ArticleList></ArticleList> */}
         </SubMenu>
 
@@ -106,6 +147,23 @@ const SliderMenu = () => {
           <Menu.Item key="8">{title}</Menu.Item>
         </SubMenu>
       </Menu>
+      <div>
+        <br></br>
+        <Button
+          size="large"
+          style={{ verticalAlign: 'center', margin: '15px', float: 'left' }}
+          onClick={newMDFile}
+        >
+          新建md文件
+        </Button>
+        <Button
+          size="large"
+          style={{ verticalAlign: 'center', margin: '15px', float: 'right' }}
+          onClick={saveNewFile}
+        >
+          保存新文件
+        </Button>
+      </div>
     </>
   );
 };

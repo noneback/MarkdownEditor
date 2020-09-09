@@ -32,6 +32,9 @@ const initLocalConfig = () => {
     window.localStorage.setItem('config', JSON.stringify(default_config));
   }
 };
+const sleep= (time) =>{
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
 
 const exportConfig = () => {
   initLocalConfig();
@@ -44,25 +47,22 @@ const generateID = length => {
   ).toString(36);
 };
 
-const getTitle = (article) => {
+const getTitle = article => {
   if (article) {
     const regex = /^#\s.*/i;
-    const title = new String(article.match(regex)).split('#')[1];
+    const middle = new String(article.match(regex)).split('#');
+    const title = middle[middle.length - 1];
     console.log(title);
-    if(!title) return "NO TITLE"
+    if (!title) return 'NO TITLE';
     return title;
   }
-  
 };
-
-
-
-
 
 export default {
   exportConfig,
   generateID,
   initLocalConfig,
   saveLocalConfig,
+  sleep,
   getTitle,
 };

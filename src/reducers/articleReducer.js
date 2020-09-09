@@ -5,8 +5,9 @@ import {
   UPDATE_CONTENT,
   CREATE_FILE,
 } from '../actions/types';
+import utils from '../utils/utils';
 const init = {
-  articleId: 1,
+  articleId: utils.generateID(),
   accountId: 1,
   title: '',
   content: ' ',

@@ -5,6 +5,7 @@ import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import CenterWrapper from '../styles/Wrapper';
+import Utils from '../utils/utils';
 
 import {
   AppstoreOutlined,
@@ -14,7 +15,8 @@ import {
 
 const { SubMenu } = Menu;
 const SliderMenu = () => {
-  const theme = useSelector(state => state.config).appearence.theme;
+  const config = useSelector(state => state.config);
+  const theme = config.appearence.theme;
   const handleClick = e => {
     console.log('click ', e);
   };
@@ -72,7 +74,12 @@ const SliderMenu = () => {
             </span>
           }
         >
-          <Menu.Item key="9">Option 9</Menu.Item>
+          <Menu.Item
+            key="9"
+            onClick={() => Utils.saveLocalConfig({ ...config })}
+          >
+            保存配置
+          </Menu.Item>
           <Menu.Item key="10">Option 10</Menu.Item>
           <Menu.Item key="11">Option 11</Menu.Item>
           <Menu.Item key="12">Option 12</Menu.Item>

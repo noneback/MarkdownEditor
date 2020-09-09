@@ -4,7 +4,8 @@ const baseUrl = '';
 
 //GET
 const getConfig = async () => {
-  const config = await Axios.get('/config');
+  const res = await Axios.get('/config');
+  const config = res.data;
   return config;
 };
 

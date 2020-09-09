@@ -7,12 +7,13 @@ const { Sider } = Layout;
 
 const AppSider = () => {
   const dispatcher = useDispatch();
-  const theme=useSelector(state=>state.config).appearence.theme;
+  const config = useSelector(state => state.config);
+  const theme = config.appearence.theme;
   const visible = useSelector(state => state.sider).visible;
 
   return (
     <Sider
-      theme={theme==='classic'?'light':'dark'}
+      theme={theme === 'classic' ? 'light' : 'dark'}
       breakpoint="lg"
       defaultCollapsed="true "
       collapsed={visible}

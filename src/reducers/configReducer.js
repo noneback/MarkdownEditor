@@ -10,12 +10,15 @@ import {
   TOGGLE_MD_MODE,
   TOGGLE_MD_PUNC,
   TOGGLE_MD_TOC,
+  CONFIG_INIT,
 } from '../actions/types';
 
 import { init_config } from '../actions/init';
 
-const configReducer = (state = init_config, action) => {
+const configReducer = (state = init_config(), action) => {
   switch (action.type) {
+    case CONFIG_INIT:
+      return action.config;
     // toolbar
     case TOGGLE_MD_TOOLBAR_VISIBLITY:
       return {

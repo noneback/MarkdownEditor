@@ -1,10 +1,38 @@
 {
   "config": {
-    "theme": "classic",
-    "typewriterMode": false,
-    "icon": "ant",
-    "outline": false,
-    "toolbar": []
+    "mode": "'ir'",
+    "appearence": {
+      "theme": "classic",
+      "icon": "ant"
+    },
+    "toolbar": {
+      "hide": true
+    },
+
+    "markdown": {
+      "autoSpace": true,
+      "chinesePunct": true,
+      "toc": false,
+      "paragraphBeginningSpace": false
+    },
+    "codeBlock": {
+      "highLight": true,
+      "lineNumber": true
+    },
+    "math": {
+      "engine": "KaTeX"
+    }
   },
-  "user": []
+  "user": {
+    "username": "noneback",
+    "passward": "asqwertyuiop"
+  },
+  "articles": [
+    {
+      "title": "The first day"
+    },
+    {
+      "title": "The secend day"
+    }
+  ]
 }

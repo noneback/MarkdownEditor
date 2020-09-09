@@ -8,7 +8,7 @@ const AppHeader = () => {
   const theme = useSelector(state => state.config).appearence.theme;
   return (
     <Header
-      // theme={theme === 'classic' ? 'light' : 'dark'}
+      theme={theme === 'classic' ? 'light' : 'dark'}
       theme={'light'}
       style={{ backgroundColor: theme === 'classic' ? 'white':'' }}
     >

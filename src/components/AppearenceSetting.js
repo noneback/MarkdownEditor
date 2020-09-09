@@ -7,16 +7,11 @@ import CustomizedSwitch from './CustomizedSwitch';
 import CustomizedSelect from './CustomizedSelect';
 import { MailOutlined } from '@ant-design/icons';
 
-import CenterWrapper from '../styles/Wrapper';
 const { Option } = Select;
 
 const AppearenceSetting = ({ key = 0, title = 0, ...props }) => {
   const dispatcher = useDispatch();
   const config = useSelector(state => state.config);
-
-  useEffect(() => {
-    console.log('props:', props);
-  }, []);
 
   const clicked = e => {
     console.log('clicked :>> ', e);
@@ -32,7 +27,7 @@ const AppearenceSetting = ({ key = 0, title = 0, ...props }) => {
         onClick={clicked}
         theme={config.appearence.theme === 'classic' ? 'light' : 'dark'}
         multiple={true}
-        style={{ width: 'auto',backgroundColor:"red",display:"inline" }}
+        style={{ width: 'auto', backgroundColor: 'red', display: 'inline' }}
         defaultOpenKeys={['sub1']}
         mode="vertical"
       >

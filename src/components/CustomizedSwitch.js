@@ -4,8 +4,6 @@ import Label from '../styles/Label'
 import LeftSpan from '../styles/LeftSpan'
 
 const CustomizedSwitch = ({ label, changed, defaultState,openHint,closeHint }) => {
-
-
   return (
     <>
       <div>

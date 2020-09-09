@@ -37,7 +37,7 @@ const CardList = () => {
       .then(articles => {
         dispatcher({ type: UPLOAD_LIST, list: articles });
       })
-      .then(res => Utils.sleep(3000).then(r => setSpin(false)))
+      .then(res => Utils.sleep(1000).then(r => setSpin(false)))
       .catch(err => console.error('deleteArtile:faild'));
   };
 

@@ -1,12 +1,19 @@
 import React, { useEffect } from 'react';
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
 import Utils from '../utils/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import Api from '../services/api';
 import Axios from 'axios';
-import { SET_ARTICLE, CHANGE_TITLE, UPDATE_CONTENT } from '../actions/types';
+import {
+  SET_ARTICLE,
+  CHANGE_TITLE,
+  UPDATE_CONTENT,
+  UPLOAD_LIST,
+} from '../actions/types';
 // /api/article/info/1
-const CardList = ({ data, onClick, setList }) => {
+const CardList = () => {
+  const data = useSelector(state => state.sider).list;
+  console.log(('typeof data', typeof data));
   const dispatcher = useDispatch();
   const article = useSelector(state => state.article);
   const gridStyle = {
@@ -27,7 +34,7 @@ const CardList = ({ data, onClick, setList }) => {
     })
       .then(res => Api.getArticles())
       .then(articles => {
-        setList(articles);
+        dispatcher({ type: UPLOAD_LIST, list: articles });
       })
       .then(res => dispatcher({ type: SET_ARTICLE, article: a }))
       .catch(err => console.error('updateArtile:faild'));
@@ -50,6 +57,7 @@ const CardList = ({ data, onClick, setList }) => {
           onClick={() => clicked(d)}
         >
           {article.id === d.id ? <strong>{d.title}</strong> : d.title}
+          <Button style={{ float: 'right' }}>删除</Button>
         </Card.Grid>
       ))}
     </Card>

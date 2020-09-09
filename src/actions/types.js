@@ -13,7 +13,9 @@ export const TOGGLE_MD_HEIHLIGHT = 'toggle_md_high';
 export const TOGGLE_MD_LINENUM = 'toggle_md_linenum';
 export const CONFIG_INIT = 'config_init';
 
-export const SET_ARTICLE='set_art'
-export const CLEAR='clear';
-export const CHANGE_TITLE='change'
-export const UPDATE_CONTENT='update_con'
+export const SET_ARTICLE = 'set_art';
+export const CLEAR = 'clear';
+export const CHANGE_TITLE = 'change';
+export const UPDATE_CONTENT = 'update_con';
+export const CREATE_FILE='create_file'
+export const UPLOAD_LIST='upload_list'

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Menu, Select } from 'antd';
+import { Menu, Select, Button } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -11,11 +11,13 @@ import {
   TOGGLE_MD_AUTOSPACE,
   TOGGLE_MD_PUNC,
   TOGGLE_MD_TOC,
+  CREATE_FILE,
   TOGGLE_MD_BEGSPACE,
   TOGGLE_MD_HEIHLIGHT,
   TOGGLE_MD_LINENUM,
   TOGGLE_MD_MATH,
   TOGGLE_MD_MODE,
+  UPLOAD_LIST,
 } from '../actions/types';
 import CustomizedSwitch from './CustomizedSwitch';
 import CustomizedSelect from './CustomizedSelect';
@@ -26,6 +28,8 @@ import {
 } from '@ant-design/icons';
 
 import CenterWrapper from '../styles/Wrapper';
+import Utils from '../utils/utils';
+import Api from '../services/api';
 const { SubMenu } = Menu;
 const { Option } = Select;
 
@@ -33,9 +37,34 @@ const TopMenu = () => {
   const dispatcher = useDispatch();
   const config = useSelector(state => state.config);
   const isFold = useSelector(state => state.sider).visible;
+  const article = useSelector(state => state.article);
+  const list = useSelector(state => state.sider).list;
 
   const clicked = e => {
     console.log('clicked :>> ', e);
+  };
+
+  const newMDFile = () => {
+    dispatcher({ type: CREATE_FILE });
+  };
+
+  const saveMDFile = () => {
+    const isIn = list.filter(l => l.id === article.id);
+    if (isIn) {
+      Api.updateArticle(article)
+        .then(res => Api.getArticles())
+        .then(res => dispatcher({ type: UPLOAD_LIST, list: res }));
+    } else {
+      const art = {
+        id: Utils.generateID(),
+        title: Utils.getTitle(article.content),
+        content: article.content,
+      };
+      Api.updateArticle(art)
+        .then(res => Api.getArticles())
+        .then(res => dispatcher({ type: UPLOAD_LIST, list: res }));
+      //createArticle
+    }
   };
 
   const style = {
@@ -95,7 +124,7 @@ const TopMenu = () => {
                 closeHint={'Dark'}
               />
             </Menu.Item>
-            // todo
+            
             <Menu.ItemGroup title="图标风格(需要刷新)">
               <CustomizedSelect
                 defaultValue={config.appearence.icon}
@@ -202,6 +231,12 @@ const TopMenu = () => {
               </CustomizedSelect>
             </Menu.ItemGroup>
           </SubMenu>
+          <Button style={{ verticalAlign: 'center' }} onClick={newMDFile}>
+            新建md文件
+          </Button>
+          <Button style={{ verticalAlign: 'center' }} onClick={saveMDFile}>
+            保存
+          </Button>
         </Menu>
       </CenterWrapper>
     </>

@@ -15,7 +15,7 @@ const AppSider = () => {
     <Sider
       theme={theme === 'classic' ? 'light' : 'dark'}
       breakpoint="lg"
-      width={"40%"}
+      width={"30%"}
       defaultCollapsed="true "
       collapsed={visible}
       collapsedWidth="0"

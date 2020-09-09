@@ -1,4 +1,10 @@
-import { SET_ARTICLE, CLEAR, CHANGE_TITLE,UPDATE_CONTENT } from '../actions/types';
+import {
+  SET_ARTICLE,
+  CLEAR,
+  CHANGE_TITLE,
+  UPDATE_CONTENT,
+  CREATE_FILE,
+} from '../actions/types';
 const init = {
   articleId: 1,
   accountId: 1,
@@ -20,6 +26,9 @@ const articleReducer = (state = init, action) => {
     }
     case UPDATE_CONTENT: {
       return { ...state, content: action.content };
+    }
+    case CREATE_FILE: {
+      return init;
     }
   }
   return state;

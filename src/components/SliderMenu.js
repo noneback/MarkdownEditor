@@ -9,6 +9,8 @@ import {
   MailOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
+
+import { UPLOAD_LIST } from '../actions/types';
 import { useSelector, useDispatch } from 'react-redux';
 import CenterWrapper from '../styles/Wrapper';
 import ArticleList from './ArticleList';
@@ -21,7 +23,8 @@ const { SubMenu } = Menu;
 const SliderMenu = () => {
   const [user, setUser] = useState({ name: 'test' });
   const [title, setTitle] = useState('');
-  const [list, setList] = useState([]);
+  // const [list, setList] = useState([]);
+  const list = useSelector(state => state.sider).list;
 
   const dispatcher = useDispatch();
 
@@ -33,6 +36,8 @@ const SliderMenu = () => {
   const userExit = () => {
     window.localStorage.setItem('vditorvditor', '');
     dispatcher({ type: 'clear' });
+    //todo 销毁
+    window.location.reload();
   };
 
   const handleClick = e => {
@@ -40,21 +45,12 @@ const SliderMenu = () => {
   };
 
   useEffect(() => {
-    Api.getArticles().then(res => setList(res));
+    Api.getArticles().then(res => dispatcher({ type: UPLOAD_LIST, list: res }));
   }, []);
+  useEffect(() => {}, []);
 
   const mockArticles = list;
-  console.log("list",list)
-  // [
-  //   {
-  //     title: 1,
-  //     content: 'asdadsdfasdsfdasaf',
-  //   },
-  //   {
-  //     title: 2,
-  //     content: 'asdadsdfasdasasdsfdasaf',
-  //   },
-  // ];
+  console.log('list', list);
 
   return (
     <>
@@ -91,7 +87,7 @@ const SliderMenu = () => {
         </SubMenu>
 
         <SubMenu key="sub2" icon={<AppstoreOutlined />} title="文章列表">
-          <CardList data={mockArticles} setList={setList}></CardList>
+          <CardList data={mockArticles}></CardList>
           {/* <ArticleList></ArticleList> */}
         </SubMenu>
 
@@ -106,13 +102,6 @@ const SliderMenu = () => {
         >
           <Menu.Item key="7" onClick={userExit}>
             确认退出
-            <button
-              onClick={() => {
-                setTitle(Utils.getTitle());
-              }}
-            >
-              save
-            </button>
           </Menu.Item>
           <Menu.Item key="8">{title}</Menu.Item>
         </SubMenu>

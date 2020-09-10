@@ -11,7 +11,7 @@ import {
   UPLOAD_LIST,
 } from '../actions/types';
 // /api/article/info/1
-const CardList = () => {
+const CardList = ({ setLen }) => {
   const data = useSelector(state => state.sider).list;
   const [spin, setSpin] = useState(false);
   console.log(('typeof data', typeof data));
@@ -25,20 +25,24 @@ const CardList = () => {
     textAlign: 'left',
   };
 
-  useEffect(() => {
-  }, [data]);
+  useEffect(() => {}, [data]);
 
   const deleteclicked = () => {
+    console.error('click delbtn');
     setSpin(true);
+    console.log('before del: article:', article.accountId);
     Api.deleteArticle(article.articleId)
-      .then(() => {
-        return Api.getArticles();
+      .then(res => {
+        console.log('indelete: res :>> ', res);
+        return Api.getArticles(window.localStorage.getItem('userId'));
       })
       .then(articles => {
+        console.log('after delete', articles);
         dispatcher({ type: UPLOAD_LIST, list: articles });
+        setLen(articles.length);
       })
       .then(res => Utils.sleep(1000).then(r => setSpin(false)))
-      .catch(err => console.error('deleteArtile:faild'));
+      .catch(err => console.error('deleteArticle:faild'));
   };
 
   const saveclicked = a => {
@@ -51,8 +55,7 @@ const CardList = () => {
       articleId: article.articleId,
     })
       .then(res => {
-
-        return Api.getArticles();
+        return Api.getArticles(window.localStorage.getItem('userId'));
       })
       .then(articles => {
         dispatcher({ type: UPLOAD_LIST, list: articles });

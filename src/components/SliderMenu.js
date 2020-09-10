@@ -22,8 +22,10 @@ import utils from '../utils/utils';
 
 const { SubMenu } = Menu;
 const SliderMenu = () => {
+  const [re, SetRe] = useState(0);
   const [user, setUser] = useState({ name: 'test' });
   const [title, setTitle] = useState('');
+  const [len, setLen] = useState(0);
   const [spin, setSpin] = useState(false);
   const list = useSelector(state => state.sider).list;
 
@@ -34,12 +36,43 @@ const SliderMenu = () => {
   const config = useSelector(state => state.config);
   const theme = config.appearence.theme;
 
+  useEffect(() => {
+    const id = window.localStorage.getItem('userId')
+      ? window.localStorage.getItem('userId')
+      : 1;
+
+    Api.getUser(id).then(res => {
+      console.log('getUSer:', res);
+      if (res === 'failure') return 0;
+      if (res.name && res.password)
+        setUser({
+          name: res.name,
+          password: res.password,
+        });
+    });
+
+    Api.getArticles(id)
+      .then(res => {
+        dispatcher({ type: UPLOAD_LIST, res });
+        setLen(res.length);
+      })
+      .catch(err => console.log('err in getArticle:', err));
+  }, []);
+
   const newMDFile = () => {
     dispatcher({ type: CREATE_FILE });
   };
 
+  useEffect(() => {
+    // Api.getArticles(article.accountId).then(res => {
+    //   console.log('getArt after save new File ', res);
+    //   dispatcher({ type: UPLOAD_LIST, list: res });
+    // });
+  }, [list]);
+
   const saveNewFile = () => {
     setSpin(true);
+    console.log('new File:', article);
 
     Api.createArticle({
       accountId: article.accountId,
@@ -47,11 +80,22 @@ const SliderMenu = () => {
       title: Utils.getTitle(article.content),
     })
       .then(res =>
+        Utils.sleep(1000).then(rest =>
+          Api.getArticles(article.accountId).then(res => {
+            console.log('getArt after save new File ', res);
+            dispatcher({ type: UPLOAD_LIST, list: res });
+            SetRe(re + 1);
+            setLen(res.length);
+          })
+        )
+      )
+      .then(res =>
         utils.sleep(500).then(res => {
           setSpin(false);
           dispatcher({ type: UPDATE_CONTENT, content: ' ' });
         })
       )
+
       .catch(err => console.log('err in saveNewFile', err));
   };
 
@@ -78,7 +122,7 @@ const SliderMenu = () => {
     window.localStorage.setItem('vditorvditor', '');
     dispatcher({ type: 'clear' });
     //todo 销毁
-    window.location.reload();
+    window.location.assign('/');
   };
 
   const handleClick = e => {
@@ -86,7 +130,9 @@ const SliderMenu = () => {
   };
 
   useEffect(() => {
-    Api.getArticles().then(res => dispatcher({ type: UPLOAD_LIST, list: res }));
+    Api.getArticles(window.localStorage.getItem('userId')).then(res =>
+      dispatcher({ type: UPLOAD_LIST, list: res })
+    );
   }, [article]);
 
   console.log('list', list);
@@ -121,13 +167,13 @@ const SliderMenu = () => {
             {/* <Menu.Item key="gender">Option 2</Menu.Item> */}
           </Menu.ItemGroup>
           <Menu.ItemGroup key="articleNum" title="文章数量">
-            <Menu.Item key="num">10</Menu.Item>
+            <Menu.Item key="num">{len}</Menu.Item>
           </Menu.ItemGroup>
         </SubMenu>
 
         <SubMenu key="sub2" icon={<AppstoreOutlined />} title="文章列表">
           <Spin spinning={spin}>
-            <CardList data={list}></CardList>
+            <CardList data={list} setLen={setLen}></CardList>
           </Spin>
           {/* <ArticleList></ArticleList> */}
         </SubMenu>

@@ -12,14 +12,13 @@ const getConfig = async () => {
   return config;
 };
 
-const getUser = async id => {
-  const res = await Axios.get(`/api/account/info/${id}`);
-  return res.data.data;
-};
+// const getUser = async id => {
+//   const res = await Axios.get(`/api/account/info/${id}`);
+//   return res.data.data;
+// };
 
-const getArticles = async () => {
+const getArticles = async id => {
   // "/api/article/info/id"
-  const id = 1;
   const res = await Axios.get(`/api/article/info/${id}`);
   console.log('res in getArticles', res);
   return res.data.data;
@@ -32,13 +31,14 @@ const postAvatar = () => {};
 //id,title,content
 const updateArticle = async article => {
   console.log('artile update');
-  var data = qs.stringify(article);
-  var config = {
+  const data = qs.stringify(article);
+  const config = {
     method: 'post',
     url: `/api/article/update/${article.articleId}`,
     headers: {},
     data: data,
   };
+  console.log(`/api/article/update/${article.articleId}`);
 
   Axios(config)
     .then(function (response) {
@@ -69,25 +69,29 @@ const updateConfig = () => {};
 const updateAll = () => {};
 
 const deleteArticle = async id => {
-  var config = {
-    method: 'get',
-    url: `api/article/delete/${id}`,
-    headers: {},
-  };
+  if (id) {
+    const config = {
+      method: 'get',
+      url: `/api/article/delete/${id}`,
+      headers: {},
+    };
 
-  Axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    return await Axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  } else {
+    console.log('delArtID:null');
+  }
 };
 
 const createArticle = async info => {
   if (info.accountId) {
     const data = qs.stringify(info);
-    var config = {
+    const config = {
       method: 'post',
       url: '/api/article/add',
       headers: {},
@@ -103,6 +107,23 @@ const createArticle = async info => {
   } else {
     console.error('accountID null');
   }
+};
+
+const getUser = async id => {
+  const config = {
+    method: 'get',
+    url: `/api/account/info/${id}`,
+    headers: {},
+  };
+
+  return await Axios(config)
+    .then(function (response) {
+      console.log('res in getUser', response);
+      return response.data.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 };
 
 export default {

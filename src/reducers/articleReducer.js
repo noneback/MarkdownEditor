@@ -6,21 +6,20 @@ import {
   CREATE_FILE,
 } from '../actions/types';
 import utils from '../utils/utils';
-const init = {
-  articleId: utils.generateID(),
-  accountId: 1,
-  title: '',
-  content: ' ',
-  created: 'Sep 9, 2020, 6:20:02 AM',
-  modified: 'Sep 9, 2020, 6:20:02 AM',
+const init = () => {
+  return {
+    accountId: window.localStorage.getItem('userId'),
+    title: '',
+    content: ' '
+  };
 };
-const articleReducer = (state = init, action) => {
+const articleReducer = (state = init(), action) => {
   switch (action.type) {
     case SET_ARTICLE: {
       return action.article;
     }
     case CLEAR: {
-      return init;
+      return init();
     }
     case CHANGE_TITLE: {
       return { ...state, title: action.title };
@@ -29,7 +28,7 @@ const articleReducer = (state = init, action) => {
       return { ...state, content: action.content };
     }
     case CREATE_FILE: {
-      return init;
+      return init();
     }
   }
   return state;

@@ -1,7 +1,0 @@
-put http://10.28.234.78:8080/api/account/login HTTP/1.1
-Content-Type: application/application/x-www-form-urlencoded
-
-{
-   "name":"ZhangSan@qq.com",
-   "password":"123"
-}

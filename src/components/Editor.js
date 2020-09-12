@@ -4,7 +4,6 @@ import Vditor from 'vditor';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './Footer';
 import Utils from '../utils/utils';
-import Axios from 'axios';
 import { UPDATE_CONTENT } from '../actions/types';
 
 const Editor = () => {
@@ -36,17 +35,11 @@ const Editor = () => {
         },
       },
       input(value) {
-        console.log('input while:', value);
         dispatcher({ type: UPDATE_CONTENT, content: value });
       },
       after() {
         Utils.saveLocalConfig({ ...config });
-        console.log(vditor);
         vditor.setValue(article.content);
-        console.log(
-          'after render editor:focus',
-          window.localStorage.getItem('vditorvditor')
-        );
       },
     });
   }, [config, article.articleId]);

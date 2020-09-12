@@ -1,7 +1,5 @@
 import Axios from 'axios';
-import Utils from '../utils/utils';
 import qs from 'qs';
-// /account/info/{id}
 
 const baseUrl = '';
 
@@ -12,13 +10,8 @@ const getConfig = async () => {
   return config;
 };
 
-// const getUser = async id => {
-//   const res = await Axios.get(`/api/account/info/${id}`);
-//   return res.data.data;
-// };
 
 const getArticles = async id => {
-  // "/api/article/info/id"
   const res = await Axios.get(`/api/article/info/${id}`);
   console.log('res in getArticles', res);
   return res.data.data;
@@ -28,9 +21,8 @@ const getArticleContent = () => {};
 
 //POST
 const postAvatar = () => {};
-//id,title,content
+
 const updateArticle = async article => {
-  console.log('artile update');
   const data = qs.stringify(article);
   const config = {
     method: 'post',
@@ -38,8 +30,6 @@ const updateArticle = async article => {
     headers: {},
     data: data,
   };
-  console.log(`/api/article/update/${article.articleId}`);
-
   Axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
@@ -48,25 +38,8 @@ const updateArticle = async article => {
       console.log(error);
     });
 
-  //   await Axios.put(`http://localhost:3001/articles/${article.id}`, article);
-  // if (article.articleId && (article.content || article.title)) {
-  //   const paras = new URLSearchParams();
-  //   paras.append('articleId', article.articleId);
-  //   paras.append('title', article.title);
-  //   paras.append('content', article.content);
-
-  //   Axios.post('/api/article/update', paras)
-  //     .then(res => console.log('update article success'))
-  //     .catch(err => console.error('wrong:', err));
-  // }
-  // Utils.sleep(1000);
 };
 
-const updateUserInfo = () => {};
-
-const updateConfig = () => {};
-
-const updateAll = () => {};
 
 const deleteArticle = async id => {
   if (id) {
@@ -135,7 +108,4 @@ export default {
   getConfig,
   postAvatar,
   updateArticle,
-  updateUserInfo,
-  updateConfig,
-  updateAll,
 };

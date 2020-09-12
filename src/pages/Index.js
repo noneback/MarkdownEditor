@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { Layout } from 'antd';
+import { useSelector } from 'react-redux';
+
 import AppHeader from '../components/AppHeader';
 import AppContent from '../components/AppContent';
 import AppSider from '../components/AppSider';
-import { useSelector } from 'react-redux';
+
 
 const Index = () => {
   const theme = 'classic';

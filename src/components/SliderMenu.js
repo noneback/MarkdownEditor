@@ -7,17 +7,15 @@ import {
   CloseCircleOutlined,
   AppstoreOutlined,
   MailOutlined,
-  SettingOutlined,
 } from '@ant-design/icons';
 
 import { UPLOAD_LIST, CREATE_FILE, UPDATE_CONTENT } from '../actions/types';
 import { useSelector, useDispatch } from 'react-redux';
 import CenterWrapper from '../styles/Wrapper';
-import ArticleList from './ArticleList';
+
 import Api from '../services/api';
 import CardList from './CardList';
 import Utils from '../utils/utils';
-import Axios from 'axios';
 import utils from '../utils/utils';
 
 const { SubMenu } = Menu;
@@ -64,10 +62,6 @@ const SliderMenu = () => {
   };
 
   useEffect(() => {
-    // Api.getArticles(article.accountId).then(res => {
-    //   console.log('getArt after save new File ', res);
-    //   dispatcher({ type: UPLOAD_LIST, list: res });
-    // });
   }, [list]);
 
   const saveNewFile = () => {
@@ -90,7 +84,7 @@ const SliderMenu = () => {
         )
       )
       .then(res =>
-        utils.sleep(500).then(res => {
+        Utils.sleep(500).then(res => {
           setSpin(false);
           dispatcher({ type: UPDATE_CONTENT, content: ' ' });
         })
@@ -114,14 +108,12 @@ const SliderMenu = () => {
       Api.updateArticle(art)
         .then(res => Api.getArticles())
         .then(res => dispatcher({ type: UPLOAD_LIST, list: res }));
-      //createArticle
     }
   };
 
   const userExit = () => {
     window.localStorage.setItem('vditorvditor', '');
     dispatcher({ type: 'clear' });
-    //todo 销毁
     window.location.assign('/');
   };
 
@@ -164,7 +156,6 @@ const SliderMenu = () => {
         >
           <Menu.ItemGroup key="g1" title="用户名">
             <Menu.Item key="username">{user.name}</Menu.Item>
-            {/* <Menu.Item key="gender">Option 2</Menu.Item> */}
           </Menu.ItemGroup>
           <Menu.ItemGroup key="articleNum" title="文章数量">
             <Menu.Item key="num">{len}</Menu.Item>
@@ -175,7 +166,6 @@ const SliderMenu = () => {
           <Spin spinning={spin}>
             <CardList data={list} setLen={setLen}></CardList>
           </Spin>
-          {/* <ArticleList></ArticleList> */}
         </SubMenu>
 
         <SubMenu

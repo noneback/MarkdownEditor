@@ -1,7 +1,13 @@
+/**
+ * Main content of App
+ */
+
 import React from 'react';
-import Editor from './Editor';
 import { useSelector } from 'react-redux';
 import { Layout } from 'antd';
+
+import Editor from './Editor';
+
 const { Content } = Layout;
 
 const AppContent = () => {

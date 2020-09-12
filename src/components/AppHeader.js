@@ -1,7 +1,12 @@
+/**
+ * App header of App
+ */
+
 import React from 'react';
 import { Layout } from 'antd';
-import TopMenu from './TopMenu';
 import { useSelector } from 'react-redux';
+
+import TopMenu from './TopMenu';
 const { Header } = Layout;
 
 const AppHeader = () => {
@@ -10,7 +15,7 @@ const AppHeader = () => {
     <Header
       theme={theme === 'classic' ? 'light' : 'dark'}
       theme={'light'}
-      style={{ backgroundColor: theme === 'classic' ? 'white':'' }}
+      style={{ backgroundColor: theme === 'classic' ? 'white' : '' }}
     >
       <TopMenu />
     </Header>

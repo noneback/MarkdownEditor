@@ -1,8 +1,13 @@
 import React from 'react';
-
 import { Menu, Select, Button } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  AppstoreOutlined,
+  MailOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
+
 import {
   TOGGLE_SIDE_FOLD,
   TOGGLE_MD_TOOLBAR_VISIBLITY,
@@ -11,25 +16,16 @@ import {
   TOGGLE_MD_AUTOSPACE,
   TOGGLE_MD_PUNC,
   TOGGLE_MD_TOC,
-  CREATE_FILE,
   TOGGLE_MD_BEGSPACE,
   TOGGLE_MD_HEIHLIGHT,
   TOGGLE_MD_LINENUM,
   TOGGLE_MD_MATH,
   TOGGLE_MD_MODE,
-  UPLOAD_LIST,
 } from '../actions/types';
 import CustomizedSwitch from './CustomizedSwitch';
 import CustomizedSelect from './CustomizedSelect';
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined,
-} from '@ant-design/icons';
 
 import CenterWrapper from '../styles/Wrapper';
-import Utils from '../utils/utils';
-import Api from '../services/api';
 const { SubMenu } = Menu;
 const { Option } = Select;
 
@@ -43,8 +39,6 @@ const TopMenu = () => {
   const clicked = e => {
     console.log('clicked :>> ', e);
   };
-
- 
 
   const style = {
     fontSize: '1em',
@@ -103,7 +97,7 @@ const TopMenu = () => {
                 closeHint={'Dark'}
               />
             </Menu.Item>
-            
+
             <Menu.ItemGroup title="图标风格(需要刷新)">
               <CustomizedSelect
                 defaultValue={config.appearence.icon}
@@ -210,7 +204,6 @@ const TopMenu = () => {
               </CustomizedSelect>
             </Menu.ItemGroup>
           </SubMenu>
-          
         </Menu>
       </CenterWrapper>
     </>

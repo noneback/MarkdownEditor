@@ -1,8 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './App';
-import Login from './pages/Login';
-import Router from './Router';
 import './index.css';
 import 'antd/dist/antd.min.css';
 import { Provider } from 'react-redux';

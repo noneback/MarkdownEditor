@@ -1,5 +1,5 @@
 import React from 'react';
-import Router from '../Router';
+// import Router from '../Router';
 
 const Login = () => {
   return (
@@ -7,7 +7,7 @@ const Login = () => {
       <div>
         <button>Click</button>
       </div>
-      <Router></Router>
+      {/* <Router></Router> */}
     </>
   );
 };

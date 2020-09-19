@@ -4,8 +4,6 @@ import Index from './pages/Index';
 import Axios from 'axios';
 
 const App = () => {
-
- 
   return <Index></Index>;
 };
 
